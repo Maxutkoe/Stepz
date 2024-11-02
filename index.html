@@ -58,7 +58,8 @@
             let speedInMbps = (speedInKbps / 1024).toFixed(2) / 100;
             alert("Your internet connection speed is: " +  speedInMbps + " Mbps\n");
             // location.reload()
-            // 51,71759414672852 o == 5 740,652950286866 км == 5 740 652,950286866 м 
+            // 51,71759414672852 o == 5 740,652950286866 км == 5 740 652,950286866 м  } 
+            // 39,16987609863281 o == 4 347,856246948242 км == 4 347 856,246948242 м  } = 24 959 533 791 466,61 м
         }
 
         function answer() {    
@@ -66,11 +67,11 @@
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
 
-                let b = 5740652.9;//(latitude*111) * 1000;
-                let ans = b - (latitude*111) * 1000;
+                let b = ((latitude*111) * (longitude*111)) * 1000;//5740652;
+                let ans = b - ((latitude*111) * (longitude*111)) * 1000;
 
-                // console.log(b);
-                alert("Сегодня вы прошли " + ans.toFixed(0) + " м");  
+                alert(ans.toFixed(0));
+                // alert("Сегодня вы прошли " + ans.toFixed(0) + " м");  
             }
 
           function error() {
