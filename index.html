@@ -61,14 +61,35 @@
             // 51,71759414672852 o == 5 740,652950286866 км == 5 740 652,950286866 м  } 
             // 39,16987609863281 o == 4 347,856246948242 км == 4 347 856,246948242 м  } = 24 959 533 791 466,61 м
         }
+        async function set(){
+          function success(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
 
-        function answer() {    
+                localStorage.setItem("lat", latitude);
+                localStorage.setItem("lon", longitude);
+
+                alert("Вот сохраненные координаты: " + latitude + " " + longitude + "!");
+                // alert("Сегодня вы прошли " + ans.toFixed(0) + " м");  
+            }
+          function error() {
+            alert("Unable to retrieve your location");
+          }
+
+          if (!navigator.geolocation) {
+            console.log("Geolocation is not supported by your browser");
+          } else {
+            console.log("Locating…");
+            navigator.geolocation.getCurrentPosition(success, error);
+          }
+        }
+        async function answer() {    
             function success(position) {
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
 
-                let startLat = 51.71755;//24 959 533 791 466;
-                let startLon = 39.170;//24 959 533 791 466;
+                let startLat = localStorage.getItem("lat");
+                let startLon = localStorage.getItem("lon");
 
                 let ans = getDistanceFromLatLonInKm(startLat, startLon, latitude, longitude);
                 let params = " км";
@@ -152,7 +173,8 @@
     </script>
     <body>
     <button id="find-me" onclick="geoFindMe()">Show my location</button><br />
-    <button id="find-me" onclick="answer()">Show my</button><br />
+    <button id="find-me" onclick="set()">Set my location</button><br />
+    <button id="find-me" onclick="answer()">SCheck location</button><br />
 <p id="status"></p>
 <a id="map-link" target="_blank"></a>
     </body>
