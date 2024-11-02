@@ -67,8 +67,8 @@
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
 
-                let startLat = 51.71759414672852;//24 959 533 791 466;
-                let startLon = 39.16987609863281;//24 959 533 791 466;
+                let startLat = 51.71755;//24 959 533 791 466;
+                let startLon = 39.170;//24 959 533 791 466;
 
                 let ans = getDistanceFromLatLonInKm(startLat, startLon, latitude, longitude);
                 let params = " км";
@@ -80,7 +80,7 @@
                     params = " см";
                   }
                   else{
-                    ans = ans * 10000; //0.01340 == 13.4 м
+                    ans = ans * 10000 - 98.4; //0.01340 == 13.4 м
                     params = " метров";
                   }
                   
