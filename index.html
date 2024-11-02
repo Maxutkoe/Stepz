@@ -58,7 +58,8 @@
             let speedInMbps = (speedInKbps / 1024).toFixed(2) / 100;
             alert("Your internet connection speed is: " +  speedInMbps + " Mbps\n");
             // location.reload()
-            // 51,71759414672852 o == 5 740,652950286866 км == 5 740 652,950286866 м 
+            // 51,71759414672852 o == 5 740,652950286866 км == 5 740 652,950286866 м  } 
+            // 39,16987609863281 o == 4 347,856246948242 км == 4 347 856,246948242 м  } = 24 959 533 791 466,61 м
         }
 
         function answer() {    
@@ -66,11 +67,12 @@
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
 
-                let b = 5740652;//(latitude*111) * 1000;
-                let ans = b - (latitude*111) * 1000;
+                let startLat = 51.71759414672852;//24 959 533 791 466;
+                let startLon = 39.16987609863281;//24 959 533 791 466;
+                let ans = getDistanceFromLatLonInKm(startLat, startLon, latitude, longitude);
 
-                // console.log(b);
-                alert("Сегодня вы прошли " + ans.toFixed(0) + " м");  
+                alert(ans.toFixed(0));
+                // alert("Сегодня вы прошли " + ans.toFixed(0) + " м");  
             }
 
           function error() {
@@ -84,6 +86,25 @@
             navigator.geolocation.getCurrentPosition(success, error);
           }
         }
+    </script>
+    <script>
+      function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+      var R = 6371; // Radius of the earth in km
+      var dLat = deg2rad(lat2-lat1);  // deg2rad below
+      var dLon = deg2rad(lon2-lon1); 
+      var a = 
+        Math.sin(dLat/2) * Math.sin(dLat/2) +
+        Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+        Math.sin(dLon/2) * Math.sin(dLon/2)
+        ; 
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      var d = R * c; // Distance in km
+      return d;
+    }
+
+    function deg2rad(deg) {
+      return deg * (Math.PI/180)
+    }
     </script>
     <script>
     async function geoFindMe() {
