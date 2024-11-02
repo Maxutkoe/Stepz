@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    </head>
+    <script>
+
+    </script>
+   <!---<script>
+        let imageAddr = "https://i.postimg.cc/QN7LX1Cb/a248cc845203fd21d0a6c24c31135b6b.jpg" + "?n=" + Math.random();
+        var startTime, endTime;
+        var downloadSize = 4035000;
+        var download = new Image();
+        download.onload = function () {
+            endTime = (new Date()).getTime();
+            showResults();
+        }
+        startTime = (new Date()).getTime();
+        download.src = imageAddr;
+
+        function showResults() {
+            var duration = Math.round((endTime - startTime) / 1000);
+            var bitsLoaded = downloadSize * 8;
+            var speedBps = Math.round(bitsLoaded / duration);
+            var speedKbps = (speedBps / 1024).toFixed(2);
+            var speedMbps = (speedKbps / 1024).toFixed(2);
+            console.log(speedKbps + " " + speedBps + " " + speedMbps);
+        }
+    </script>-->
+    <script type="text/javascript">
+        let downloadSize = 9116998;
+        let time_start, end_time;
+          let userImageLink =
+"https://i.postimg.cc/yxyvDVwV/a248cc845203fd21d0a6c24c31135b6b.jpg";
+          // The size in bytes
+        let downloadImgSrc = new Image();
+
+
+        downloadImgSrc.onload = function ff() {
+            end_time = new Date().getTime();
+            displaySpeed();
+        };
+        time_start = new Date().getTime();
+        downloadImgSrc.src = userImageLink;
+      
+
+        function displaySpeed() {
+            let timeDuration = (end_time - time_start) / 1000;
+            let loadedBits = downloadSize * 8;
+
+            /* Converts a number into string
+               using toFixed(2) rounding to 2 */
+            let bps = (loadedBits / timeDuration).toFixed(2);
+            let speedInKbps = (bps / 1024).toFixed(2);
+            let speedInMbps = (speedInKbps / 1024).toFixed(2) / 100;
+            alert("Your internet connection speed is: " +  speedInMbps + " Mbps\n");
+            // location.reload()
+            // 51,71759414672852 o == 5 740,652950286866 км == 5 740 652,950286866 м 
+        }
+
+        function answer() {    
+            function success(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                let b = 5740652.9;//(latitude*111) * 1000;
+                let ans = b - (latitude*111) * 1000;
+
+                // console.log(b);
+                alert("Сегодня вы прошли " + ans.toFixed(0) + " м");  
+            }
+
+          function error() {
+            status.textContent = "Unable to retrieve your location";
+          }
+
+          if (!navigator.geolocation) {
+            status.textContent = "Geolocation is not supported by your browser";
+          } else {
+            status.textContent = "Locating…";
+            navigator.geolocation.getCurrentPosition(success, error);
+          }
+        }
+    </script>
+    <script>
+    async function geoFindMe() {
+  const status = document.querySelector("#status");
+  const mapLink = document.querySelector("#map-link");
+
+  mapLink.href = "";
+  mapLink.textContent = "";
+
+  function success(position) {
+    const latitude = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    status.textContent = "";
+    mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
+    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+  }
+
+  function error() {
+    status.textContent = "Unable to retrieve your location";
+  }
+
+  if (!navigator.geolocation) {
+    status.textContent = "Geolocation is not supported by your browser";
+  } else {
+    status.textContent = "Locating…";
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
+}
+    </script>
+    <body>
+    <button id="find-me" onclick="geoFindMe()">Show my location</button><br />
+    <button id="find-me" onclick="answer()">Show my</button><br />
+<p id="status"></p>
+<a id="map-link" target="_blank"></a>
+    </body>
+</html>
