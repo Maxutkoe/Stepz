@@ -84,6 +84,7 @@
           }
         }
         async function answer() {    
+          let status = document.getElementById("status");
             function success(position) {
                 const latitude = position.coords.latitude;
                 const longitude = position.coords.longitude;
@@ -107,20 +108,15 @@
                   
                 }
 
-                alert("Сегодня вы прошли " + ans.toFixed(5) + params);
+                status.textContent = "Сегодня вы прошли " + ans.toFixed(2) + params;
                 // alert("Сегодня вы прошли " + ans.toFixed(0) + " м");  
             }
 
           function error() {
             status.textContent = "Unable to retrieve your location";
           }
-
-          if (!navigator.geolocation) {
-            status.textContent = "Geolocation is not supported by your browser";
-          } else {
-            status.textContent = "Locating…";
-            navigator.geolocation.getCurrentPosition(success, error);
-          }
+          console.log("Locating…");
+          navigator.geolocation.watchPosition(success, error);
         }
     </script>
     <script>
