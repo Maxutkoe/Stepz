@@ -115,8 +115,14 @@
           function error() {
             status.textContent = "Unable to retrieve your location";
           }
-          console.log("Locating…");
-          navigator.geolocation.watchPosition(success, error);
+          if(navigator.geolocation){
+            console.log("Locating…");
+            navigator.geolocation.watchPosition(success, error);
+          }
+          else{
+            console.log("Nothing!");
+          }
+          
         }
     </script>
     <script>
